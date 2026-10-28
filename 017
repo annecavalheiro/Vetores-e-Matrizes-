@@ -1,0 +1,49 @@
+/* 17 - Peça ao usuário para digitar dez valores numéricos e ordene por ordem crescente estes valores, guardando-os num vetor. Ordene o valor assim que ele for digitado. Mostre ao final os valores em ordem. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void inserirOrdenado(int v[], int *tam, int valor);
+void imprimirVetor(int v[], int n);
+
+int main() {
+    int v[10];
+    int tam = 0;
+    int num;
+
+    // Lê 10 valores inserindo e ordenando a cada digitação (Insertion Sort online)
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &num);
+        inserirOrdenado(v, &tam, num);
+    }
+
+    printf("\nValores em ordem crescente:\n");
+    imprimirVetor(v, 10);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Insere o valor no vetor na posição correta mantendo-o sempre ordenado
+void inserirOrdenado(int v[], int *tam, int valor) {
+    int i = *tam - 1;
+
+    // Desloca os elementos maiores que 'valor' para a direita
+    while (i >= 0 && v[i] > valor) {
+        v[i + 1] = v[i];
+        i--;
+    }
+
+    // Insere o novo valor na posição correta
+    v[i + 1] = valor;
+    (*tam)++;
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
