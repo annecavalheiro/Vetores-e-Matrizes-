@@ -1,0 +1,57 @@
+/* 12 - Leia 10 números inteiros e armazene em um vetor v. Crie dois novos vetores v1 e v2. Copie os valores ímpares de v para v1, e os valores pares de v para v2. Note que cada um dos vetores v1 e v2 têm no máximo 10 elementos, mas nem todos os elementos são utilizados. No final escreva os elementos UTILIZADOS de v1 e v2. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void separarParesImpares(int v[], int n, int v1[], int *qtd1, int v2[], int *qtd2);
+void imprimirVetor(int v[], int n);
+
+int main() {
+    int v[10], v1[10], v2[10];
+    int qtd1 = 0, qtd2 = 0;
+
+    lerVetor(v, 10);
+    separarParesImpares(v, 10, v1, &qtd1, v2, &qtd2);
+
+    printf("Elementos impares (v1):\n");
+    imprimirVetor(v1, qtd1);
+
+    printf("Elementos pares (v2):\n");
+    imprimirVetor(v2, qtd2);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê 10 elementos para o vetor original
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Separa os ímpares para v1 e os pares para v2, atualizando a quantidade de elementos de cada um
+void separarParesImpares(int v[], int n, int v1[], int *qtd1, int v2[], int *qtd2) {
+    *qtd1 = 0;
+    *qtd2 = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (v[i] % 2 != 0) {
+            v1[*qtd1] = v[i];
+            (*qtd1)++;
+        } else {
+            v2[*qtd2] = v[i];
+            (*qtd2)++;
+        }
+    }
+}
+
+// Imprime apenas a quantidade de elementos efetivamente utilizados
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
