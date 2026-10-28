@@ -1,0 +1,52 @@
+/* 01 - Escreva um programa que leia 10 números inteiros e os armazene em um vetor. Imprima o vetor, o maior elemento e a posição que ele se encontra. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void imprimirVetor(int v[], int n);
+int encontrarMaior(int v[], int n, int *pos);
+
+int main() {
+    int v[10], pos;
+
+    lerVetor(v, 10);
+
+    printf("Vetor: ");
+    imprimirVetor(v, 10);
+
+    int maior = encontrarMaior(v, 10, &pos);
+    printf("Maior: %d\nPosicao: %d\n", maior, pos);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê n elementos do vetor
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
+
+// Retorna o maior valor e guarda a posição no ponteiro *pos
+int encontrarMaior(int v[], int n, int *pos) {
+    int maior = v[0];
+    *pos = 0;
+    for (int i = 1; i < n; i++) {
+        if (v[i] > maior) {
+            maior = v[i];
+            *pos = i;
+        }
+    }
+    return maior;
+}
