@@ -1,0 +1,66 @@
+/* 02 - Escreva um programa que leia n números inteiros no intervalo [0,50] e os armazene em um vetor estaticamente alocado com 100 posições. Preencha um segundo vetor, também alocado estaticamente, apenas com os números ímpares do primeiro vetor. Imprima os dois vetores, 10 elementos por linha. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+int lerVetorValido(int v[], int n);
+int extraiImpares(int orig[], int n, int dest[]);
+void imprimirFormatado(int v[], int n);
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int v1[100], v2[100];
+    int qtdLidos = lerVetorValido(v1, n);
+    int qtdImpares = extraiImpares(v1, qtdLidos, v2);
+
+    printf("Primeiro vetor:\n");
+    imprimirFormatado(v1, qtdLidos);
+
+    printf("Vetor de impares:\n");
+    imprimirFormatado(v2, qtdImpares);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê valores no intervalo [0, 50] e retorna quantos foram válidos
+int lerVetorValido(int v[], int n) {
+    int lidos = 0;
+    for (int i = 0; i < n; i++) {
+        int val;
+        scanf("%d", &val);
+        if (val >= 0 && val <= 50) {
+            v[lidos] = val;
+            lidos++;
+        }
+    }
+    return lidos;
+}
+
+// Copia apenas os valores ímpares para o segundo vetor
+int extraiImpares(int orig[], int n, int dest[]) {
+    int qtd = 0;
+    for (int i = 0; i < n; i++) {
+        if (orig[i] % 2 != 0) {
+            dest[qtd] = orig[i];
+            qtd++;
+        }
+    }
+    return qtd;
+}
+
+// Imprime quebrando linha a cada 10 elementos
+void imprimirFormatado(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+        if ((i + 1) % 10 == 0) {
+            printf("\n");
+        }
+    }
+    if (n % 10 != 0) {
+        printf("\n");
+    }
+}
