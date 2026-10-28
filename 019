@@ -1,0 +1,58 @@
+/* 19 - Ler dois conjuntos de números reais, armazenando-os em vetores e calcular o produto escalar entre eles. Os conjuntos têm no máximo 20 elementos. Imprimir os dois conjuntos e o produto escalar, sendo que o produto escalar é dado por: x1 * y1 + x2 * y2 + ... + xn * yn. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(float v[], int n);
+void imprimirVetor(float v[], int n);
+float calcularProdutoEscalar(float x[], float y[], int n);
+
+int main() {
+    int n;
+    float x[20], y[20];
+
+    // Lê a quantidade de elementos (máximo 20)
+    do {
+        scanf("%d", &n);
+    } while (n <= 0 || n > 20);
+
+    lerVetor(x, n);
+    lerVetor(y, n);
+
+    printf("Conjunto X:\n");
+    imprimirVetor(x, n);
+
+    printf("Conjunto Y:\n");
+    imprimirVetor(y, n);
+
+    float prodEscalar = calcularProdutoEscalar(x, y, n);
+    printf("Produto Escalar: %.2f\n", prodEscalar);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê n números reais para o vetor
+void lerVetor(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%f", &v[i]);
+    }
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", v[i]);
+    }
+    printf("\n");
+}
+
+// Calcula e retorna o produto escalar entre dois vetores (x1*y1 + x2*y2 + ...)
+float calcularProdutoEscalar(float x[], float y[], int n) {
+    float soma = 0.0f;
+    for (int i = 0; i < n; i++) {
+        soma += x[i] * y[i];
+    }
+    return soma;
+}
