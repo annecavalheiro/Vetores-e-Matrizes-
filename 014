@@ -1,0 +1,54 @@
+/* 14 - Leia um vetor com 10 números de ponto flutuante, ordene os elementos deste vetor, e no final escreva os elementos do vetor ordenado. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(float v[], int n);
+void ordenarVetor(float v[], int n);
+void imprimirVetor(float v[], int n);
+
+int main() {
+    float v[10];
+
+    lerVetor(v, 10);
+    ordenarVetor(v, 10);
+
+    printf("Vetor ordenado:\n");
+    imprimirVetor(v, 10);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê 10 números reais para o vetor
+void lerVetor(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%f", &v[i]);
+    }
+}
+
+// Ordena o vetor de floats em ordem crescente (Selection Sort)
+void ordenarVetor(float v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int menor = i;
+        for (int j = i + 1; j < n; j++) {
+            if (v[j] < v[menor]) {
+                menor = j;
+            }
+        }
+        if (menor != i) {
+            float temp = v[i];
+            v[i] = v[menor];
+            v[menor] = temp;
+        }
+    }
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", v[i]);
+    }
+    printf("\n");
+}
