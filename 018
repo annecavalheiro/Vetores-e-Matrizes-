@@ -1,0 +1,50 @@
+/* 18 - Faça um programa que leia dez conjuntos de dois valores, o primeiro representando o número do aluno e o segundo representando a sua altura em metros. Encontre o aluno mais baixo e o mais alto. Mostre o número do aluno mais baixo e do mais alto, juntamente com suas alturas. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerDados(int numero[], float altura[], int n);
+void encontrarExtremos(int numero[], float altura[], int n, int *idMaisAlto, float *altMaisAlto, int *idMaisBaixo, float *altMaisBaixo);
+
+int main() {
+    int numero[10];
+    float altura[10];
+    int idMaisAlto, idMaisBaixo;
+    float altMaisAlto, altMaisBaixo;
+
+    lerDados(numero, altura, 10);
+    encontrarExtremos(numero, altura, 10, &idMaisAlto, &altMaisAlto, &idMaisBaixo, &altMaisBaixo);
+
+    printf("\nAluno mais alto: Numero %d | Altura: %.2fm\n", idMaisAlto, altMaisAlto);
+    printf("Aluno mais baixo: Numero %d | Altura: %.2fm\n", idMaisBaixo, altMaisBaixo);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê o número e a altura dos 10 alunos
+void lerDados(int numero[], float altura[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d %f", &numero[i], &altura[i]);
+    }
+}
+
+// Determina o número e a altura do aluno mais alto e do mais baixo
+void encontrarExtremos(int numero[], float altura[], int n, int *idMaisAlto, float *altMaisAlto, int *idMaisBaixo, float *altMaisBaixo) {
+    *idMaisAlto = numero[0];
+    *altMaisAlto = altura[0];
+    *idMaisBaixo = numero[0];
+    *altMaisBaixo = altura[0];
+
+    for (int i = 1; i < n; i++) {
+        if (altura[i] > *altMaisAlto) {
+            *altMaisAlto = altura[i];
+            *idMaisAlto = numero[i];
+        }
+        if (altura[i] < *altMaisBaixo) {
+            *altMaisBaixo = altura[i];
+            *idMaisBaixo = numero[i];
+        }
+    }
+}
