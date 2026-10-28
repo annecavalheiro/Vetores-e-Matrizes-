@@ -1,0 +1,31 @@
+/* 10 - Ler uma sequência de nos. reais e determinar o maior elemento desta sequência. A sequência termina quando for digitado o no. Zero. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+float determinarMaior();
+
+int main() {
+    float maior = determinarMaior();
+    printf("Maior elemento: %.2f\n", maior);
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê a sequência de números até ser digitado 0 e retorna o maior deles
+float determinarMaior() {
+    float num, maior;
+    
+    scanf("%f", &num);
+    maior = num; // Inicializa o maior com o primeiro valor lido
+
+    while (num != 0.0f) {
+        if (num > maior) {
+            maior = num;
+        }
+        scanf("%f", &num); // Lê o próximo número
+    }
+
+    return maior;
+}
