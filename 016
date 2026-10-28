@@ -1,0 +1,55 @@
+/* 16 - Faça um programa para ler 10 números DIFERENTES a serem armazenados em um vetor. Os dados deverão ser armazenados no vetor na ordem que forem sendo lidos, sendo que caso o usuário digite um número que já foi digitado anteriormente, o programa deverá pedir para ele digitar outro número. Note que cada valor digitado pelo usuário deve ser pesquisado no vetor, verificando se ele existe entre os números que já foram fornecidos. Exibir na tela o vetor final que foi digitado. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+int estaNoVetor(int v[], int tam, int valor);
+void lerVetorSemRepeticao(int v[], int n);
+void imprimirVetor(int v[], int n);
+
+int main() {
+    int v[10];
+
+    lerVetorSemRepeticao(v, 10);
+
+    printf("\nVetor final digitado:\n");
+    imprimirVetor(v, 10);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Verifica se o valor já foi inserido até a posição atual (tam)
+int estaNoVetor(int v[], int tam, int valor) {
+    for (int i = 0; i < tam; i++) {
+        if (v[i] == valor) {
+            return 1; // Encontrou duplicata
+        }
+    }
+    return 0; // Não encontrou
+}
+
+// Lê os números garantindo que não existam repetidos
+void lerVetorSemRepeticao(int v[], int n) {
+    int i = 0;
+    while (i < n) {
+        int num;
+        scanf("%d", &num);
+
+        if (estaNoVetor(v, i, num)) {
+            printf("Numero ja digitado! Digite outro: ");
+        } else {
+            v[i] = num;
+            i++;
+        }
+    }
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
