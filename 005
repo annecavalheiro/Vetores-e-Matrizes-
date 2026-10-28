@@ -1,0 +1,32 @@
+/* 05 - Faça um programa para ler a nota da prova de 15 alunos e calcule e imprima a média geral. Obs.: Tente fazer o programa usando funções, usando uma função para ler as notas e outra para calcular a média. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerNotas(float v[], int n);
+float calcularMedia(float v[], int n);
+
+int main() {
+    float notas[15];
+    lerNotas(notas, 15);
+    printf("Media geral: %.2f\n", calcularMedia(notas, 15));
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê as notas digitadas
+void lerNotas(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%f", &v[i]);
+    }
+}
+
+// Calcula e retorna a média do vetor
+float calcularMedia(float v[], int n) {
+    float soma = 0;
+    for (int i = 0; i < n; i++) {
+        soma += v[i];
+    }
+    return soma / n;
+}
