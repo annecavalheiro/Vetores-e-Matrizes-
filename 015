@@ -1,0 +1,48 @@
+/* 15 - Leia um vetor com 20 números inteiros. Escreva os elementos do vetor eliminando elementos repetidos. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void imprimirSemRepetidos(int v[], int n);
+
+int main() {
+    int v[20];
+
+    lerVetor(v, 20);
+
+    printf("Vetor sem elementos repetidos:\n");
+    imprimirSemRepetidos(v, 20);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê 20 números inteiros
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Imprime os elementos mantendo apenas a primeira ocorrência de cada valor
+void imprimirSemRepetidos(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        int jaApareceu = 0;
+        
+        // Verifica se o elemento já apareceu antes no vetor
+        for (int j = 0; j < i; j++) {
+            if (v[i] == v[j]) {
+                jaApareceu = 1;
+                break;
+            }
+        }
+
+        // Se é a primeira vez que ele aparece, imprime
+        if (!jaApareceu) {
+            printf("%d ", v[i]);
+        }
+    }
+    printf("\n");
+}
