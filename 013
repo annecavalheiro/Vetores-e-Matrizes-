@@ -1,0 +1,142 @@
+/* 13 - Leia dois vetores de inteiros X e Y, cada um com 5 elementos (assuma que o usuário não informa elementos repetidos). Calcule e mostre os vetores resultantes em cada caso abaixo:
+   - Soma entre X e Y
+   - Produto entre X e Y
+   - Diferença entre X e Y
+   - Interseção entre X e Y
+   - União entre X e Y */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void imprimirVetor(int v[], int n);
+void calcularSoma(int x[], int y[], int res[], int n);
+void calcularProduto(int x[], int y[], int res[], int n);
+int calcularDiferenca(int x[], int y[], int res[], int n);
+int calcularIntersecao(int x[], int y[], int res[], int n);
+int calcularUniao(int x[], int y[], int res[], int n);
+
+int main() {
+    int X[5], Y[5];
+    int resSoma[5], resProd[5], resDif[5], resInter[5], resUniao[10];
+    int qtdDif, qtdInter, qtdUniao;
+
+    lerVetor(X, 5);
+    lerVetor(Y, 5);
+
+    // Soma e Produto
+    calcularSoma(X, Y, resSoma, 5);
+    calcularProduto(X, Y, resProd, 5);
+
+    // Operações de Conjuntos
+    qtdDif = calcularDiferenca(X, Y, resDif, 5);
+    qtdInter = calcularIntersecao(X, Y, resInter, 5);
+    qtdUniao = calcularUniao(X, Y, resUniao, 5);
+
+    printf("Soma X + Y:\n");
+    imprimirVetor(resSoma, 5);
+
+    printf("Produto X * Y:\n");
+    imprimirVetor(resProd, 5);
+
+    printf("Diferenca (X - Y):\n");
+    imprimirVetor(resDif, qtdDif);
+
+    printf("Intersecao (X e Y):\n");
+    imprimirVetor(resInter, qtdInter);
+
+    printf("Uniao (X u Y):\n");
+    imprimirVetor(resUniao, qtdUniao);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
+
+// Soma posição por posição
+void calcularSoma(int x[], int y[], int res[], int n) {
+    for (int i = 0; i < n; i++) {
+        res[i] = x[i] + y[i];
+    }
+}
+
+// Multiplicação posição por posição
+void calcularProduto(int x[], int y[], int res[], int n) {
+    for (int i = 0; i < n; i++) {
+        res[i] = x[i] * y[i];
+    }
+}
+
+// Todos os elementos de X que NÃO estão em Y
+int calcularDiferenca(int x[], int y[], int res[], int n) {
+    int qtd = 0;
+    for (int i = 0; i < n; i++) {
+        int achou = 0;
+        for (int j = 0; j < n; j++) {
+            if (x[i] == y[j]) {
+                achou = 1;
+                break;
+            }
+        }
+        if (!achou) {
+            res[qtd] = x[i];
+            qtd++;
+        }
+    }
+    return qtd;
+}
+
+// Apenas os elementos que estão em AMBOS os vetores
+int calcularIntersecao(int x[], int y[], int res[], int n) {
+    int qtd = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (x[i] == y[j]) {
+                res[qtd] = x[i];
+                qtd++;
+                break;
+            }
+        }
+    }
+    return qtd;
+}
+
+// Todos os elementos de X + elementos de Y que NÃO estão em X
+int calcularUniao(int x[], int y[], int res[], int n) {
+    int qtd = 0;
+
+    // Copia todo o vetor X
+    for (int i = 0; i < n; i++) {
+        res[qtd] = x[i];
+        qtd++;
+    }
+
+    // Copia elementos de Y que não existem em X
+    for (int i = 0; i < n; i++) {
+        int achou = 0;
+        for (int j = 0; j < n; j++) {
+            if (y[i] == x[j]) {
+                achou = 1;
+                break;
+            }
+        }
+        if (!achou) {
+            res[qtd] = y[i];
+            qtd++;
+        }
+    }
+    return qtd;
+}
