@@ -1,0 +1,34 @@
+/* 03 - Leia um vetor de 10 posições. Contar e escrever quantos valores pares ele possui. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+int contarPares(int v[], int n);
+
+int main() {
+    int v[10];
+    lerVetor(v, 10);
+    printf("Quantidade de pares: %d\n", contarPares(v, 10));
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê os valores do vetor
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Conta e retorna a quantidade de números pares
+int contarPares(int v[], int n) {
+    int pares = 0;
+    for (int i = 0; i < n; i++) {
+        if (v[i] % 2 == 0) {
+            pares++;
+        }
+    }
+    return pares;
+}
