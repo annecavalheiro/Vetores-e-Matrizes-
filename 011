@@ -1,0 +1,55 @@
+/* 11 - Leia 10 números inteiros e armazene em um vetor. Em seguida escreva os elementos que são primos e suas respectivas posições no vetor. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+int ehPrimo(int n);
+void mostrarPrimos(int v[], int n);
+
+int main() {
+    int v[10];
+
+    lerVetor(v, 10);
+
+    printf("Elementos primos e suas posicoes:\n");
+    mostrarPrimos(v, 10);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê 10 elementos para o vetor
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Retorna 1 se o número for primo e 0 se não for
+int ehPrimo(int n) {
+    if (n <= 1) {
+        return 0;
+    }
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Percorre o vetor e imprime os elementos primos com seus índices
+void mostrarPrimos(int v[], int n) {
+    int encontrou = 0;
+    for (int i = 0; i < n; i++) {
+        if (ehPrimo(v[i])) {
+            printf("Valor: %d | Posicao: %d\n", v[i], i);
+            encontrou = 1;
+        }
+    }
+    if (!encontrou) {
+        printf("Nenhum numero primo foi encontrado.\n");
+    }
+}
