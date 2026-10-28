@@ -1,0 +1,42 @@
+/* 04 - Leia um vetor de 10 posições e atribua valor 0 para todos os elementos que possuírem valores negativos. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void zerarNegativos(int v[], int n);
+void imprimirVetor(int v[], int n);
+
+int main() {
+    int v[10];
+    lerVetor(v, 10);
+    zerarNegativos(v, 10);
+    imprimirVetor(v, 10);
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê os elementos do vetor
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Substitui elementos negativos por 0
+void zerarNegativos(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (v[i] < 0) {
+            v[i] = 0;
+        }
+    }
+}
+
+// Imprime os elementos do vetor
+void imprimirVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
