@@ -1,0 +1,58 @@
+/* 08 - Faça um programa que leia um vetor de 10 posições e verifique se existem valores iguais e os escreva. */
+
+#include <stdio.h>
+
+/* --- Protótipos das Funções --- */
+void lerVetor(int v[], int n);
+void verificarRepetidos(int v[], int n);
+
+int main() {
+    int v[10];
+
+    lerVetor(v, 10);
+
+    printf("Valores iguais encontrados no vetor:\n");
+    verificarRepetidos(v, 10);
+
+    return 0;
+}
+
+/* --- Implementação das Funções --- */
+
+// Lê 10 números inteiros
+void lerVetor(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &v[i]);
+    }
+}
+
+// Verifica e imprime os elementos que possuem duplicatas no vetor
+void verificarRepetidos(int v[], int n) {
+    int encontrou = 0;
+
+    for (int i = 0; i < n - 1; i++) {
+        // Verifica se o valor já foi processado anteriormente para não repetir no output
+        int jaVerificado = 0;
+        for (int k = 0; k < i; k++) {
+            if (v[i] == v[k]) {
+                jaVerificado = 1;
+                break;
+            }
+        }
+
+        if (!jaVerificado) {
+            for (int j = i + 1; j < n; j++) {
+                if (v[i] == v[j]) {
+                    printf("%d ", v[i]);
+                    encontrou = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!encontrou) {
+        printf("Nenhum valor igual foi encontrado.");
+    }
+    printf("\n");
+}
